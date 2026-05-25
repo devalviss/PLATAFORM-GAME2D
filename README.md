@@ -12,8 +12,8 @@ O projeto utiliza uma combinação de assets incríveis da comunidade técnica e
 
 | Recurso | Tipo | Autor/Origem | Link |
 | :--- | :--- | :--- | :--- |
-| **GrafxKid Pack 6** | Personagens & Inimigos | GrafxKid (Itch.io) | [Acessar Asset](https://grafxkid.itch.io/) |
-| **Seasonal Tilesets** | Cenários, Moedas & Blocos | Kenney / GrafxKid | [Acessar Itch.io](https://itch.io/) |
+| **GrafxKid Pack 6** | Personagens & Inimigos | GrafxKid (Itch.io) | [Acessar Asset](https://grafxkid.itch.io/sprite-pack-6) |
+| **Seasonal Tilesets** | Cenários, Moedas & Blocos | Kenney / GrafxKid | [Acessar Itch.io](https://grafxkid.itch.io/seasonal-tilesets) |
 | **Trilha & Efeitos Sonoros** | Áudio Chiptune 8-bit | OpenGameArt | [Acessar Site](https://opengameart.org/) |
 
 > ⚠️ **Nota de Configuração de Resolução:** O jogo foi estruturado nativamente na resolução clássica **288 × 208 pixels** (fator de forma Neo Geo) utilizando o modo `viewport` da Godot com técnica de *Pixel Snap* ativa. Isso garante um visual extremamente limpo ("crocante") mesmo ao expandir a janela para telas modernas em 16:9 (1080p).
