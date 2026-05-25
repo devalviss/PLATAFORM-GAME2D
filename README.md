@@ -44,7 +44,16 @@ Acompanhando o tutorial do **Rafael Forbeck**, as seguintes mecânicas fundament
 
 Se você deseja abrir o projeto no seu computador para estudar o código ou jogar:
 
-1. Baixe e instale a **Godot Engine 4** (versão estável mais recente).
+1. Baixe e instale a **Godot Engine 4** (versão estável mais recente).\
 2. Faça o clone deste repositório:
 ```bash
    git clone https://github.com/devalviss/PLATAFORM-GAME2D.git
+```
+
+3.Abra a Godot Engine, clique em Importar (Import) e selecione o arquivo project.godot na pasta raiz do projeto clonado.\
+4.Clique no botão de Play (ou aperte F5) no canto superior direito para rodar o jogo! \
+
+## 🎮 Controles Padrão
+Mover para Esquerda: A ou Seta Esquerda \
+Mover para Direita: D ou Seta Direita \
+Pular: Espaço ou Seta para Cima
