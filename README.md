@@ -56,4 +56,4 @@ Se você deseja abrir o projeto no seu computador para estudar o código ou joga
 ## 🎮 Controles Padrão
 Mover para Esquerda: A ou Seta Esquerda \
 Mover para Direita: D ou Seta Direita \
-Pular: Espaço ou Seta para Cima
+Pular: W, Espaço ou Seta para Cima
