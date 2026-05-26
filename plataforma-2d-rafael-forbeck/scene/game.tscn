@@ -1,0 +1,103 @@
+[gd_scene format=4 uid="uid://p1ml8lxcynxo"]
+
+[ext_resource type="PackedScene" uid="uid://obk5s880xtl5" path="res://entities/player.tscn" id="1_5kiuu"]
+[ext_resource type="TileSet" uid="uid://bsqnct61a8k3" path="res://tiles/terrain.tres" id="2_33cqm"]
+[ext_resource type="TileSet" uid="uid://uaeaouqo1i2g" path="res://tiles/decoration.tres" id="3_xwcet"]
+[ext_resource type="Texture2D" uid="uid://bx2wydmse4bre" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/5 - Sky_color.png" id="4_ll5lq"]
+[ext_resource type="Texture2D" uid="uid://8ep4mcj0j4rs" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/4 - Floating_clouds.png" id="5_17rxn"]
+[ext_resource type="Texture2D" uid="uid://dbqiwt7y15n6m" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/3 - Background_clouds.png" id="6_yq8tf"]
+[ext_resource type="Texture2D" uid="uid://4exhcaubkjhg" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/1 - Waters_version_1.png" id="7_ym5sv"]
+[ext_resource type="Texture2D" uid="uid://b7m5v0o15kxyf" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/2 - Waters_version_2.png" id="8_sng2h"]
+[ext_resource type="PackedScene" uid="uid://67qbex8vmy4g" path="res://entities/level_end.tscn" id="10_ym5sv"]
+[ext_resource type="PackedScene" uid="uid://c3qdglhhwfk4s" path="res://entities/camera.tscn" id="10_yq8tf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5g16k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ym5sv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sng2h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sng2h"]
+size = Vector2(20, 64)
+
+[node name="GAME" type="Node2D" unique_id=53925540]
+
+[node name="Scenario" type="Node2D" parent="." unique_id=891336286]
+position = Vector2(0, -15)
+
+[node name="Sky" type="Parallax2D" parent="Scenario" unique_id=771305782]
+texture_repeat = 2
+repeat_size = Vector2(288, 208)
+repeat_times = 3
+
+[node name="Sky" type="Sprite2D" parent="Scenario/Sky" unique_id=73714153]
+z_index = -1
+texture = ExtResource("4_ll5lq")
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="Scenario" unique_id=1168294524]
+texture_repeat = 2
+scroll_scale = Vector2(0.1, 0.05)
+repeat_size = Vector2(288, 0)
+repeat_times = 3
+
+[node name="Clouds" type="Sprite2D" parent="Scenario/Clouds" unique_id=2126605685]
+z_index = -1
+texture = ExtResource("5_17rxn")
+centered = false
+
+[node name="BGClouds" type="Parallax2D" parent="Scenario" unique_id=973090184]
+scroll_scale = Vector2(0.2, 0.1)
+repeat_size = Vector2(288, 0)
+repeat_times = 3
+
+[node name="BGClouds" type="Sprite2D" parent="Scenario/BGClouds" unique_id=1709666815]
+z_index = -1
+texture = ExtResource("6_yq8tf")
+centered = false
+
+[node name="BGWater" type="Parallax2D" parent="Scenario" unique_id=1950210389]
+z_index = -1
+scroll_scale = Vector2(0.3, 0.15)
+scroll_offset = Vector2(1, -5)
+repeat_size = Vector2(288, 0)
+repeat_times = 3
+
+[node name="BGWater" type="AnimatedSprite2D" parent="Scenario/BGWater" unique_id=117808173]
+position = Vector2(432, 121)
+sprite_frames = SubResource("SpriteFrames_5g16k")
+autoplay = "default"
+
+[node name="TileMaps" type="Node" parent="." unique_id=1426632917]
+
+[node name="Terrain" type="TileMapLayer" parent="TileMaps" unique_id=1203303809]
+position = Vector2(0, -10)
+tile_map_data = PackedByteArray("AAAAAA0AAAADAAEAAAABAA0AAAAEAAEAAAACAA0AAAAEAAEAAAADAA0AAAAEAAEAAAAEAA0AAAAEAAEAAAAFAA0AAAAEAAEAAAAGAA0AAAAEAAEAAAAHAA0AAAAEAAEAAAAIAA0AAAAEAAIAAAAIAAwAAAADAAUAAAAIAAsAAAABAAMAAAAJAAsAAAAEAAEAAAAKAAsAAAAEAAEAAAALAAsAAAAEAAEAAAAMAAsAAAAEAAEAAAAAAA4AAAADAAIAAAAAAA8AAAADAAIAAAAAABAAAAADAAIAAAABABAAAAAEAAYAAAACABAAAAAEAAYAAAADABAAAAAEAAYAAAAEABAAAAAEAAYAAAAFABAAAAAEAAYAAAAGABAAAAAEAAYAAAAHABAAAAAEAAYAAAAIABAAAAAEAAYAAAAJABAAAAAEAAYAAAAKABAAAAAEAAYAAAALABAAAAAEAAYAAAAMABAAAAAEAAYAAAAIAA4AAAAEAAIAAAAHAA4AAAAEAAIAAAAGAA4AAAAEAAIAAAAFAA4AAAAEAAIAAAAEAA4AAAAEAAIAAAADAA4AAAAEAAIAAAACAA4AAAAEAAIAAAABAA4AAAAEAAIAAAABAA8AAAAEAAIAAAACAA8AAAAEAAIAAAADAA8AAAAEAAIAAAAEAA8AAAAEAAIAAAAFAA8AAAAEAAIAAAAGAA8AAAAEAAIAAAAHAA8AAAAEAAIAAAAIAA8AAAAEAAIAAAAJAAwAAAAEAAIAAAAJAA0AAAAEAAIAAAAJAA4AAAAEAAIAAAAJAA8AAAAEAAIAAAAKAAwAAAAEAAIAAAAKAA0AAAAEAAIAAAAKAA4AAAAEAAIAAAAKAA8AAAAEAAIAAAALAAwAAAAEAAIAAAALAA0AAAAEAAIAAAALAA4AAAAEAAIAAAALAA8AAAAEAAIAAAAMAAwAAAAEAAIAAAAMAA0AAAAEAAIAAAAMAA4AAAAEAAIAAAAMAA8AAAAEAAIAAAANAAsAAAAEAAEAAAANAAwAAAAEAAIAAAANAA0AAAAEAAIAAAANAA4AAAAEAAIAAAANAA8AAAAEAAIAAAANABAAAAAEAAYAAAAOAAsAAAAEAAEAAAAOAAwAAAAEAAIAAAAOAA0AAAAEAAIAAAAOAA4AAAAEAAIAAAAOAA8AAAAEAAIAAAAOABAAAAAEAAYAAAAPAAsAAAAEAAEAAAAPAAwAAAAEAAIAAAAPAA0AAAAEAAIAAAAPAA4AAAAEAAIAAAAPAA8AAAAEAAIAAAAPABAAAAAEAAYAAAAQAAsAAAAEAAEAAAAQAAwAAAAEAAIAAAAQAA0AAAAEAAIAAAAQAA4AAAAEAAIAAAAQAA8AAAAEAAIAAAAQABAAAAAEAAYAAAARAAsAAAAEAAEAAAARAAwAAAAEAAIAAAARAA0AAAAEAAIAAAARAA4AAAAEAAIAAAARAA8AAAAEAAIAAAARABAAAAAEAAYAAAASAAsAAAAEAAEAAAASAAwAAAAEAAIAAAASAA0AAAAEAAIAAAASAA4AAAAEAAIAAAASAA8AAAAEAAIAAAASABAAAAAEAAYAAAATAAsAAAAEAAEAAAATAAwAAAAEAAIAAAATAA0AAAAEAAIAAAATAA4AAAAEAAIAAAATAA8AAAAEAAIAAAATABAAAAAEAAYAAAAUAAsAAAAEAAEAAAAUAAwAAAAEAAIAAAAUAA0AAAAEAAIAAAAUAA4AAAAEAAIAAAAUAA8AAAAEAAIAAAAUABAAAAAEAAYAAAAVAAsAAAAEAAEAAAAVAAwAAAAEAAIAAAAVAA0AAAAEAAIAAAAVAA4AAAAEAAIAAAAVAA8AAAAEAAIAAAAVABAAAAAEAAYAAAAWAAsAAAAEAAEAAAAWAAwAAAAEAAIAAAAWAA0AAAAEAAIAAAAWAA4AAAAEAAIAAAAWAA8AAAAEAAIAAAAWABAAAAAEAAYAAAAXAAsAAAAEAAEAAAAXAAwAAAAEAAIAAAAXAA0AAAAEAAIAAAAXAA4AAAAEAAIAAAAXAA8AAAAEAAIAAAAXABAAAAAEAAYAAAAYAAsAAAAEAAEAAAAYAAwAAAAEAAIAAAAYAA0AAAAEAAIAAAAYAA4AAAAEAAIAAAAYAA8AAAAEAAIAAAAYABAAAAAEAAYAAAAZAAsAAAAEAAEAAAAZAAwAAAAEAAIAAAAZAA0AAAAEAAIAAAAZAA4AAAAEAAIAAAAZAA8AAAAEAAIAAAAZABAAAAAEAAYAAAA=")
+tile_set = ExtResource("2_33cqm")
+
+[node name="Decoration" type="TileMapLayer" parent="TileMaps" unique_id=2014294977]
+position = Vector2(0, -10)
+tile_map_data = PackedByteArray("AAAEAAwAAAABAAUAAAAIAAoAAAAOAAUAAAAJAAoAAAAGAAUAAAAKAAoAAAAHAAUAAAAIAAkAAAAOAAQAAAAGAAsAAAAOAAQAAAAGAAwAAAAOAAUAAAALAAkAAAABAAEAAAAPAAgAAgAAAAAAAAASAAkAAAABAAEAAAAVAAkAAAABAAEAAAAYAAkAAAABAAEAAAA=")
+tile_set = ExtResource("3_xwcet")
+
+[node name="Camera" parent="." unique_id=813815645 instance=ExtResource("10_yq8tf")]
+limit_right = 410
+
+[node name="Player" parent="." unique_id=96280003 instance=ExtResource("1_5kiuu")]
+
+[node name="LevelEnd" parent="." unique_id=1299442682 instance=ExtResource("10_ym5sv")]
+next_level = "tropic"
+
+[node name="CollisionShape2D" parent="LevelEnd" index="0" unique_id=1669227250]
+position = Vector2(421, 133)
+shape = SubResource("RectangleShape2D_sng2h")
+
+[editable path="LevelEnd"]
