@@ -6,17 +6,19 @@ enum PlayerState {
 	jump,
 	fall,
 	duck,
-	slide
+	slide,
+	death
 }
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_normal: CollisionShape2D = $CollisionNormal
 @onready var collision_duck: CollisionShape2D = $CollisionDuck
+@onready var hitbox: Area2D = $Hitbox
 
 @export var max_speed = 90.0
-@export var acceleration = 500;
-@export var deceleration = 500;
-@export var slide_deceleration = 100
+@export var acceleration = 500
+@export var deceleration = 500
+@export var slide_deceleration = 75
 
 const JUMP_VELOCITY = -300.0
 var jump_count = 0
@@ -46,6 +48,8 @@ func _physics_process(delta: float) -> void:
 			fall_state(delta)
 		PlayerState.slide:
 			slide_state(delta)
+		PlayerState.death:
+			death_state(delta)
 	move_and_slide()
 
 #   ____  ___   _____ ___    _________  _____ _____   _____ ____   ___  __  __ 
@@ -89,6 +93,11 @@ func go_to_slide_state():
 
 func exit_from_slide_state():
 	set_normal_collider()
+	
+func go_to_death_state():
+	status = PlayerState.death
+	anim.play("death")
+	velocity = Vector2.ZERO
 
 #      ____ _____  _  _____ _____     ____ _____  _  _____ _____ 
 #     / ___|_   _|/ \|_   _| ____|   / ___|_   _|/ \|_   _| ____|
@@ -143,18 +152,19 @@ func jump_state(delta):
 	if Input.is_action_just_pressed("jump") && can_jump():
 		go_to_jump_state()
 		return
-	
+		
 	if velocity.y > 0:
 		go_to_fall_state()
 		return
-	
+
+
 func fall_state(delta):
 	move(delta)
-	
+
 	if Input.is_action_just_pressed("jump") && can_jump():
 		go_to_jump_state()
 		return
-		
+
 	# Jump exit condition: When touching the ground again
 	if is_on_floor():
 		jump_count = 0
@@ -178,12 +188,15 @@ func slide_state(delta):
 		exit_from_slide_state()
 		go_to_walk_state()
 		return
-		
+
 	if velocity.x == 0:
 		exit_from_slide_state()
 		go_to_duck_state()
 		return
 
+
+func death_state(_delta):
+	pass
 # --- AUXILIARY MOVEMENT FUNCTION (Now separate from other functions) ---
 func move(delta):
 	update_direction()
@@ -214,3 +227,21 @@ func set_small_collider():
 func set_normal_collider():
 	collision_normal.set_deferred("disabled",false)
 	collision_duck.set_deferred("disabled",true)
+	
+func fall_and_slide():
+	if velocity.y > 0:
+		go_to_fall_state()
+	elif Input.is_action_just_pressed("duck"):
+		go_to_slide_state()
+		return
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	# If the Y velocity is greater than 0, the player is FALLING on the enemy's head.
+	if velocity.y > 0:
+		#Enemy dead
+		area.get_parent().take_damage()
+		go_to_jump_state()
+	else:
+		#Player dead
+		go_to_death_state()

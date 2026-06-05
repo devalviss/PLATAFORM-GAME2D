@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://obk5s880xtl5"]
 
 [ext_resource type="Script" uid="uid://cyb64wvw7voiv" path="res://scripts/player.gd" id="1_rfe5m"]
+[ext_resource type="Texture2D" uid="uid://bwxxwimadwa8u" path="res://sprites/Sprite Pack 6/1 - Penguin/Hurt (16 x 16).png" id="2_ef06p"]
 [ext_resource type="Texture2D" uid="uid://cceue6t4xswyu" path="res://sprites/Sprite Pack 6/1 - Penguin/Ducking (16 x 16).png" id="2_qly61"]
 [ext_resource type="Texture2D" uid="uid://dtf7lnaewixyv" path="res://sprites/Sprite Pack 6/1 - Penguin/Idle (16 x 16).png" id="2_rfe5m"]
 [ext_resource type="Texture2D" uid="uid://cuk4kwpm6451b" path="res://sprites/Sprite Pack 6/1 - Penguin/Jump (16 x 16).png" id="3_qly61"]
 [ext_resource type="Texture2D" uid="uid://ctg6uv4rdn2c1" path="res://sprites/Sprite Pack 6/1 - Penguin/Falling (16 x 16).png" id="3_qsoyl"]
+[ext_resource type="Texture2D" uid="uid://66m0efkh4vok" path="res://sprites/Sprite Pack 6/1 - Penguin/Lying_On_Ground (16 x 16).png" id="3_tjdhl"]
 [ext_resource type="Texture2D" uid="uid://d1rgii5jybntb" path="res://sprites/Sprite Pack 6/1 - Penguin/Waddling (16 x 16).png" id="4_qsoyl"]
 [ext_resource type="Texture2D" uid="uid://bc5cklpqrat0k" path="res://sprites/Sprite Pack 6/1 - Penguin/Belly_Sliding (16 x 16).png" id="6_6nm46"]
 
@@ -76,6 +78,17 @@ region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i623q"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ef06p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tjdhl")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_qly61")
@@ -158,6 +171,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nm46"]
+size = Vector2(12, 15)
+
 [node name="Player" type="CharacterBody2D" unique_id=96280003 groups=["Player"]]
 collision_layer = 2
 collision_mask = 13
@@ -174,6 +190,15 @@ shape = SubResource("RectangleShape2D_qly61")
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_i623q")
-animation = &"slide"
+animation = &"death"
 autoplay = "slide"
-frame_progress = 0.15565579
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1201791456]
+
+[node name="CollisionHitbox" type="CollisionShape2D" parent="Hitbox" unique_id=1022358546]
+z_index = 1
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6nm46")
+debug_color = Color(0.79607844, 0.05490196, 1, 0.41960785)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

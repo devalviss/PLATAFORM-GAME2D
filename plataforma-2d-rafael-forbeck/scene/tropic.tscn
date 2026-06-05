@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b7m5v0o15kxyf" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/2 - Waters_version_2.png" id="5_34ia6"]
 [ext_resource type="PackedScene" uid="uid://c3qdglhhwfk4s" path="res://entities/camera.tscn" id="9_34ia6"]
 [ext_resource type="PackedScene" uid="uid://67qbex8vmy4g" path="res://entities/level_end.tscn" id="10_d18o5"]
+[ext_resource type="PackedScene" uid="uid://dt0rtqqynt8uu" path="res://entities/skeleton.tscn" id="11_t8vtq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d18o5"]
 animations = [{
@@ -96,6 +97,10 @@ limit_right = 509
 
 [node name="Player" parent="." unique_id=96280003 instance=ExtResource("1_bmxgx")]
 position = Vector2(29, 164)
+collision_mask = 9
+
+[node name="Skeleton" parent="." unique_id=499856222 instance=ExtResource("11_t8vtq")]
+position = Vector2(85, 140)
 
 [node name="LevelEnd" parent="." unique_id=1299442682 instance=ExtResource("10_d18o5")]
 position = Vector2(504, 166)
