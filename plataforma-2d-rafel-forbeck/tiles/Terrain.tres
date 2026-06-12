@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cpjun7dkw5vjh" path="res://sprites/GrafxKid/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_r0ryr"]
 [ext_resource type="Texture2D" uid="uid://ccrxf66krmsus" path="res://sprites/GrafxKid/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="2_324lj"]
+[ext_resource type="Texture2D" uid="uid://d4knn3maf5cdu" path="res://sprites/GrafxKid/Seasonal Tilesets/3 - Tropics/undewater_terrain.png" id="2_x23o1"]
 [ext_resource type="Texture2D" uid="uid://blvuumda8qx5k" path="res://sprites/GrafxKid/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="3_x23o1"]
 [ext_resource type="Texture2D" uid="uid://bpy2xqvkg1ayl" path="res://sprites/GrafxKid/Seasonal Tilesets/4 - Winter World/Terrain (16 x 16).png" id="4_wqtma"]
 
@@ -89,6 +90,19 @@ texture = ExtResource("1_r0ryr")
 5:6/0 = 0
 5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:8/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wqtma"]
+texture = ExtResource("2_x23o1")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fg0xw"]
 resource_name = "Autumn"
@@ -316,5 +330,6 @@ sources/0 = SubResource("TileSetAtlasSource_qpk70")
 sources/3 = SubResource("TileSetAtlasSource_fg0xw")
 sources/4 = SubResource("TileSetAtlasSource_q33yl")
 sources/5 = SubResource("TileSetAtlasSource_fhani")
+sources/1 = SubResource("TileSetAtlasSource_wqtma")
 pattern_0 = SubResource("TileMapPattern_r0ryr")
 pattern_1 = SubResource("TileMapPattern_324lj")
