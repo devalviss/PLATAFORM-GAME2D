@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PLATAFORMA2D-RAFEL FORBECK"
-run/main_scene="uid://chifnsh7bmwip"
+run/main_scene="uid://b77nd7g03gp60"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,7 @@ window/stretch/mode="canvas_items"
 
 Player=""
 Lethal_Area=""
+Enemies=""
 
 [input]
 
