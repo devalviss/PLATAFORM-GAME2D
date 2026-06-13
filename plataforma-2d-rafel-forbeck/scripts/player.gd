@@ -8,7 +8,8 @@ enum PlayerState{
 	Fall,
 	Slide,
 	Death,
-	Wall
+	Wall,
+	Swimming
 }
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -18,13 +19,16 @@ enum PlayerState{
 @onready var left_wall_detector: RayCast2D = $LeftWallDetector
 @onready var right_wall_detector: RayCast2D = $RightWallDetector
 
-@export var max_speed = 100.0
+@export var max_speed = 180.0
 @export var acceleration = 400
 @export var deceleration = 400
 @export var Slide_deceleration = 100
 @export var max_Jump_count = 2
 @export var wall_acceleration = 40
 @export var wall_jump_velocity = 250
+@export var water_max_speed = 100
+@export var water_acceleration = 200
+@export var jump_force = -60
 
 const JUMP_VELOCITY = -200.0
 var status: PlayerState
@@ -54,6 +58,8 @@ func _physics_process(delta: float) -> void:
 			Death_state(delta)
 		PlayerState.Wall:
 			Wall_state(delta)
+		PlayerState.Swimming:
+			Swimming_state(delta)
 	move_and_slide()
 
 #   ____  ___   _____ ___    _________  _____ _____   _____ ____   ___  __  __ 
@@ -113,6 +119,10 @@ func go_to_Wall_state():
 	velocity = Vector2.ZERO
 	Jump_count = 0
 
+func go_to_Swimming_state():
+	status = PlayerState.Swimming
+	anim.play("Swimming")
+	velocity.y = min(velocity.y, 200)
 #       ____ _____  _  _____ _____    __ ____ _____  _  _____ _____ 
 #      / ___|_   _|/ \|_   _| ____|  / // ___|_   _|/ \|_   _| ____|
 #      \___ \ | | / _ \ | | |  _|   / / \___ \ | | / _ \ | | |  _|  
@@ -123,16 +133,17 @@ func go_to_Wall_state():
 func Idle_state(delta):
 	apply_gravity(delta)
 	move(delta)
-	if velocity.x != 0:
-		go_to_Walk_state()
-		return
-
+	
 	if Input.is_action_just_pressed("Jump"):
 		go_to_Jump_state()
 		return
 
 	if Input.is_action_pressed("Duck"):
 		go_to_Duck_state()
+		return
+
+	if velocity.x != 0:
+		go_to_Walk_state()
 		return
 
 func Walk_state(delta):
@@ -240,6 +251,20 @@ func Wall_state(delta):
 		go_to_Jump_state()
 		return
 
+func Swimming_state(delta):
+	update_direction()
+	
+	if direction:
+		velocity.x = move_toward(velocity.x, water_max_speed * direction, water_acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, water_acceleration * delta)
+	
+	velocity.y += wall_acceleration * delta
+	velocity.y = min(velocity.y, water_max_speed)
+	
+	if Input.is_action_just_pressed("Jump"):
+		velocity.y = jump_force
+
 #     _    ____ ____ ___ ____ _____  _    _   _ _____ ____  
 #    / \  / ___/ ___|_ _/ ___|_   _|/ \  | \ | |_   _/ ___| 
 #   / _ \ \___ \___ \| |\___ \ | | / _ \ |  \| | | | \___ \ 
@@ -294,6 +319,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Lethal_Area"):
 		go_to_Death_state()
+	elif body.is_in_group("Water"):
+		go_to_Swimming_state()
 
 func hit_enemy(area: Area2D):
 	if global_position.y < area.global_position.y:
@@ -309,3 +336,8 @@ func hit_lethal_area():
 
 func _on_reload_timer_timeout() -> void:
 	get_tree().reload_current_scene()
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Water"):
+		Jump_count = 0
+		go_to_Jump_state()

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PLATAFORMA2D-RAFEL FORBECK"
-run/main_scene="uid://b77nd7g03gp60"
+run/main_scene="uid://ce23fm0xlugaq"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -29,6 +29,7 @@ window/stretch/mode="canvas_items"
 Player=""
 Lethal_Area=""
 Enemies=""
+Water=""
 
 [input]
 
@@ -65,6 +66,7 @@ Duck={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Level_End"
 2d_physics/layer_5="Lethal_Area"
+2d_physics/layer_6="Water"
 
 [physics]
 

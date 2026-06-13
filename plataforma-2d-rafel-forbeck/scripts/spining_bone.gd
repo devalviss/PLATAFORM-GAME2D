@@ -12,7 +12,6 @@ func set_direction(Skeletondirection):
 	direction = Skeletondirection
 	anim.flip_h = direction < 0
 
-
 func _on_self_destruction_timer_timeout() -> void:
 	queue_free()
 

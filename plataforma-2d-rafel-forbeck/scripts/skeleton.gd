@@ -55,7 +55,7 @@ func go_to_Idle_state():
 func go_to_Walk_state():
 	status = SkeletonState.Walk
 	anim.play("Walk")
-	
+
 func go_to_Death_state():
 	status = SkeletonState.Death
 	anim.play("Death")
@@ -67,8 +67,6 @@ func go_to_Attack_state():
 	anim.play("Attack")
 	velocity = Vector2.ZERO
 	can_throw = true
-	
-
 
 #       ____ _____  _  _____ _____    __ ____ _____  _  _____ _____ 
 #      / ___|_   _|/ \|_   _| ____|  / // ___|_   _|/ \|_   _| ____|
